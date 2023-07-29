@@ -7,13 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Hangfire.Core\Hangfire.Core.csproj" />
-    <ProjectReference Include="..\..\src\Hangfire.AspNetCore\Hangfire.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\src\Hangfire.SqlServer\Hangfire.SqlServer.csproj" />
-    <ProjectReference Include="..\ConsoleSample\ConsoleSample.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.4" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.8" />
   </ItemGroup>

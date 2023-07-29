@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using ConsoleSample;
 using Hangfire;
 using Hangfire.Annotations;
 using Hangfire.Client;
@@ -53,9 +51,7 @@ namespace NetCoreSample
                     services.AddHangfire((provider, configuration) => configuration
                         .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                         .UseSimpleAssemblyNameTypeSerializer()
-                        .UseSqlServerStorage(
-                            @"Server=.\;Database=Hangfire.Sample;Trusted_Connection=True;", 
-                            provider.GetRequiredService<SqlServerStorageOptions>()));
+                        .UseSqlServerStorage(@"Server=.\;Database=Hangfire.Sample;Trusted_Connection=True;", provider.GetRequiredService<SqlServerStorageOptions>()));
 
                     services.AddHostedService<RecurringJobsService>();
                     services.AddHangfireServer(options =>
@@ -140,8 +136,6 @@ namespace NetCoreSample
         {
             try
             {
-                _backgroundJobs.Enqueue<Services>(x => x.LongRunning(JobCancellationToken.Null));
-
                 _recurringJobs.AddOrUpdate("seconds", () => Console.WriteLine("Hello, seconds!"), "*/15 * * * * *");
                 _recurringJobs.AddOrUpdate("minutely", () => Console.WriteLine("Hello, world!"), Cron.Minutely);
                 _recurringJobs.AddOrUpdate("hourly", () => Console.WriteLine("Hello"), "25 15 * * *");
